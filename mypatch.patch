@@ -1,0 +1,522 @@
+diff --git a/application/application/ws/controllers/user.php b/application/application/ws/controllers/user.php
+index 2cb2813..f6cbc18 100755
+--- a/application/application/ws/controllers/user.php
++++ b/application/application/ws/controllers/user.php
+@@ -241,7 +241,7 @@ class User extends REST_Controller {
+                 $userId = $this->user_model->createWebAccount($this->post());
+                 /* @var $accountResp type */
+                 if (@$userId !== '') {
+-                        $accountResp = $this->general_model->getUserBasicRecordById($userId);
++                    $accountResp = $this->general_model->getUserBasicRecordById($userId);
+                     $accountResp['hMac'] = genratemac($userId);
+ 
+                     $MESSAGE = ACCOUNT_SUCCESS_WEB;
+@@ -349,7 +349,6 @@ class User extends REST_Controller {
+         $this->response($resp, 200);
+     }
+ 
+-
+     /*
+      * TO CREATE A NEW ACCOUNT
+      * URL : http://your-site/ws/user/createAccount/
+@@ -507,10 +506,9 @@ class User extends REST_Controller {
+     }
+ 
+     function socialiteCreate_post() {
+-
++        
+     }
+ 
+-
+     /**
+      * Check if social a/c exists or not for a user
+      *
+@@ -534,11 +532,11 @@ class User extends REST_Controller {
+                 $providerId = $this->post('providerId');
+                 $provider = $this->post('provider');
+ 
+-                if(strtolower($provider) == 'google') {
++                if (strtolower($provider) == 'google') {
+                     // new method created to check google plus account
+                     $USERDATA = $this->user_model->gpUserIdCheck($providerId);
+                     $STATUS = SUCCESS_STATUS;
+-                } else if(strtolower($provider) == 'facebook') {
++                } else if (strtolower($provider) == 'facebook') {
+                     $USERDATA = $this->user_model->fbUserIdCheck($providerId);
+                     $STATUS = SUCCESS_STATUS;
+                 } else {
+@@ -908,7 +906,7 @@ class User extends REST_Controller {
+                 'STATUS' => $STATUS
+             );
+ 
+-            if(@$RESTAURANTDATA !== '') {
++            if (@$RESTAURANTDATA !== '') {
+                 $resp['RESTAURANTDATA'] = $RESTAURANTDATA;
+             }
+ 
+@@ -1473,7 +1471,6 @@ class User extends REST_Controller {
+         }
+     }
+ 
+-
+     /**
+      * Return all the choice list from db
+      * music, interests, cuisines
+@@ -1516,4 +1513,61 @@ class User extends REST_Controller {
+         }
+     }
+ 
++    function getUsersList_post() {
++        try {
++            /*
++             * TO SET DEFAULT VARIABLE VALUES...
++             */
++            //$USERCHOICEDATA = '';
++
++            $MESSAGE = '';
++            $STATUS = SUCCESS_STATUS;
++            $USERDATA = $this->user_model->userList($this->post());
++
++            if (empty($USERDATA)) {
++                $MESSAGE = NO_RECORD_FOUND;
++            }
++            $resp = array(
++                'MESSAGE' => $MESSAGE,
++                'STATUS' => $STATUS
++            );
++
++            if (@$USERDATA !== '') {
++                $resp['USER'] = $USERDATA;
++            }
++
++            $this->response($resp, 200);
++        } catch (Exception $ex) {
++            throw new Exception('Error in getUsersList function - ' . $ex);
++        }
++    }
++
++    function getFollowersAndFollowing_post() {
++        try {
++            /*
++             * TO SET DEFAULT VARIABLE VALUES...
++             */
++            $allowParam = array(
++                'userId'
++            );
++            $MESSAGE = INSUFF_DATA;
++            $STATUS = FAIL_STATUS;
++
++            if (checkselectedparams($this->post(), $allowParam)) {
++                $countArrRes = $this->user_model->getFollowersAndFollowing($this->post('userId'));
++                if ($countArrRes != -1) {
++                    $STATUS = SUCCESS_STATUS;
++                    $MESSAGE = '';
++                }
++            }
++            $resp = array(
++                'MESSAGE' => $MESSAGE,
++                'STATUS' => $STATUS,
++                'FOLLOWDATA' => $countArrRes
++            );
++            $this->response($resp, 200);
++        } catch (Exception $ex) {
++            throw new Exception('Error in getUsersList function - ' . $ex);
++        }
++    }
+ }
+diff --git a/application/application/ws/models/restaurant_model.php b/application/application/ws/models/restaurant_model.php
+index a640c49..718fe4d 100755
+--- a/application/application/ws/models/restaurant_model.php
++++ b/application/application/ws/models/restaurant_model.php
+@@ -434,7 +434,7 @@ class Restaurant_Model extends CI_Model {
+             $result = $this->db->query($sql, $params)->result_array();
+             $restaurantData = [];
+             $this->load->model("user_model", "user_model");
+-            foreach($result as $data) {
++            foreach ($result as $data) {
+                 $minTime = $data['restaurantMinTime'];
+                 $maxTime = $data['restaurantMaxTime'];
+                 $timeSlot = $this->user_model->getRestaurantTimeSlot($minTime, $maxTime);
+@@ -1406,7 +1406,7 @@ class Restaurant_Model extends CI_Model {
+     }
+ 
+     /**
+-    /**
++      /**
+      * Book restaurant table via WEB
+      * @param array $postValue
+      * @return int
+@@ -1912,4 +1912,58 @@ class Restaurant_Model extends CI_Model {
+         }
+     }
+ 
++    function getUserBookingCart($postValue = array()) {
++        try {
++            if (!empty($postValue)) {
++                extract($postValue);
++
++                $qry = 'SELECT iTableBookID FROM tbl_table_book'
++                        . ' WHERE iRestaurantID IN(' . $restaurantId . ') '
++                        . ' AND iSlotID IN(' . $slotId . ') '
++                        . ' AND tDateTime >= \'' . date('Y-m-d', strtotime($bookDate)) . '\' ';
++
++                $res = $this->db->query($qry);
++
++                if ($res->num_rows() <= 0) {
++                    $ins = array(
++                        'iRestaurantID' => $restaurantId,
++                        'iUserID' => $userId,
++                        'iSlotID' => $slotId,
++                        'iWaitTime' => 0,
++                        'iPersonTotal' => $totalPerson,
++                        'tDateTime' => date('Y-m-d', strtotime($bookDate)),
++                        'tCreatedAt' => date('Y-m-d', strtotime($bookDate))
++                    );
++
++                    $this->db->insert('tbl_table_book', $ins);
++
++                    $insId = $this->db->insert_id();
++
++                    $this->general_model->addUserPointValue($userId, 3, $insId);
++
++
++                    /*
++                     * HERE PUSH NOTIFICATION WILL SEND IT TO VENDOR APP
++                     */
++                    $record = $this->db->query('SELECT ePlatform, vDeviceToken FROM tbl_admin WHERE iRestaurantID IN(' . $restaurantId . ')')->row_array();
++
++                    $this->load->library('pushnotify');
++
++                    $osType = $record['ePlatform'] == 'ios' ? 2 : 1;
++                    $deviceToken = $record['vDeviceToken'];
++
++                    $mesg = 'You have a new booking request.';
++
++                    if ($deviceToken != '') {
++                        $this->pushnotify->sendIt($osType, $deviceToken, $mesg, 2);
++                    }
++
++                    return $insId;
++                } return -2;
++            } return -1;
++        } catch (Exception $ex) {
++            throw new Exception('Error in bookTable function - ' . $ex);
++        }
++    }
++
+ }
+diff --git a/application/application/ws/models/smtpmail_model.php b/application/application/ws/models/smtpmail_model.php
+old mode 100644
+new mode 100755
+diff --git a/application/application/ws/models/user_model.php b/application/application/ws/models/user_model.php
+index 6ef2e47..5bd496c 100755
+--- a/application/application/ws/models/user_model.php
++++ b/application/application/ws/models/user_model.php
+@@ -56,8 +56,7 @@ class User_Model extends CI_Model {
+         }
+     }
+ 
+-    function getUserIdFromEmail($emailId)
+-    {
++    function getUserIdFromEmail($emailId) {
+         try {
+             if ($emailId !== '') {
+                 $res = $this->db->select('iUserID')->get_where($this->table, array('vEmail' => $emailId))->row_array();
+@@ -229,14 +228,14 @@ class User_Model extends CI_Model {
+                  * PREPARE THE INSERT DATA ARRAY...
+                  */
+                 $data = array(
+-                    'vFullName'  => @$userFullName,
+-                    'vEmail'     => @$userEmail,
+-                    'vMobileNo'  => @$userMobile,
+-                    'vPassword'  => md5(@$userPassword),
+-                    'eGender'    => @$userGender,
+-                    'dtDOB'      => @$userDob,
++                    'vFullName' => @$userFullName,
++                    'vEmail' => @$userEmail,
++                    'vMobileNo' => @$userMobile,
++                    'vPassword' => md5(@$userPassword),
++                    'eGender' => @$userGender,
++                    'dtDOB' => @$userDob,
+                     'tCreatedAt' => date('Y-m-d H:i:s'),
+-                    'eStatus'    => ACCOUNT_STATUS_INACTIVE,
++                    'eStatus' => ACCOUNT_STATUS_INACTIVE,
+                 );
+                 $this->db->insert($this->table, $data);
+                 $userId = $this->db->insert_id();
+@@ -244,13 +243,13 @@ class User_Model extends CI_Model {
+                     // generate 24 hr exipry signup verification link
+                     $link = sha1(uniqid(rand(), TRUE));
+                     $linkData = [
+-                        'userid'      => $userId,
+-                        'hash'        => $link,
++                        'userid' => $userId,
++                        'hash' => $link,
+                         'datecreated' => date('Y-m-d H:i:s'),
+                     ];
+ 
+                     $this->load->model("link_model", "link_model");
+-                    if($this->link_model->createSingupLink($linkData)) {
++                    if ($this->link_model->createSingupLink($linkData)) {
+                         /*
+                          * SEND A MAIL...
+                          */
+@@ -258,9 +257,9 @@ class User_Model extends CI_Model {
+                         $this->load->model("smtpmail_model", "smtpmail_model");
+                         $param = array(
+                             '%MAILSUBJECT%' => 'HungerMafia : ' . $subject,
+-                            '%LOGO_IMAGE%'  => BASEURL . '/images/hungermafia.jpg',
+-                            '%USER_NAME%'   => @$userFullName,
+-                            '%LINK%'        => WEB_USER_ACTIVATION . $link
++                            '%LOGO_IMAGE%' => BASEURL . '/images/hungermafia.jpg',
++                            '%USER_NAME%' => @$userFullName,
++                            '%LINK%' => WEB_USER_ACTIVATION . $link
+                         );
+ 
+                         $tmplt = DIR_VIEW . 'email/signup_verify.php';
+@@ -278,8 +277,7 @@ class User_Model extends CI_Model {
+         }
+     }
+ 
+-    function createWebSocialAccount($postValues)
+-    {
++    function createWebSocialAccount($postValues) {
+         try {
+             $returnValue = '';
+             if (!empty($postValues)) {
+@@ -288,19 +286,19 @@ class User_Model extends CI_Model {
+                 $random = random_string('alnum', 12);
+                 // PREPARE THE INSERT DATA ARRAY...
+                 $data = array(
+-                    'vFullName'  => @$userFullName,
+-                    'vEmail'     => @$userEmail,
+-                    'vPassword'  => md5($random),
++                    'vFullName' => @$userFullName,
++                    'vEmail' => @$userEmail,
++                    'vPassword' => md5($random),
+                     'tCreatedAt' => date('Y-m-d H:i:s'),
+-                    'eStatus'    => ACCOUNT_STATUS_ACTIVE,
++                    'eStatus' => ACCOUNT_STATUS_ACTIVE,
+                 );
+-                if($userProvider == 'facebook'){
++                if ($userProvider == 'facebook') {
+                     $data['vFBUserID'] = $userProviderId;
+                 }
+-                 if($userProvider == 'google'){
++                if ($userProvider == 'google') {
+                     $data['vGPUserID'] = $userProviderId;
+                 }
+-                
++
+                 if (!empty(@$userGender)) {
+                     $data['eGender'] = @$userGender;
+                 }
+@@ -314,15 +312,15 @@ class User_Model extends CI_Model {
+                      */
+                     $this->load->model('smtpmail_model');
+                     $subject = 'Your Account created successfully.';
+-                    $param   = array(
+-                        '%MAILSUBJECT%'  => 'HungerMafia : ' . $subject,
+-                        '%LOGO_IMAGE%'   => UPLOADS . '/hungermafia.png',
+-                        '%USER_NAME%'    => @$userFullName,
++                    $param = array(
++                        '%MAILSUBJECT%' => 'HungerMafia : ' . $subject,
++                        '%LOGO_IMAGE%' => UPLOADS . '/hungermafia.png',
++                        '%USER_NAME%' => @$userFullName,
+                         '%NEW_PASSWORD%' => trim($random),
+                     );
+-                    $tmplt   = DIR_VIEW . 'email/social_signup_password.php';
++                    $tmplt = DIR_VIEW . 'email/social_signup_password.php';
+                     $subject = 'HungerMafia : ' . $subject;
+-                    $to      = $userEmail;
++                    $to = $userEmail;
+                     $this->smtpmail_model->send($to, $subject, $tmplt, $param);
+ 
+                     $returnValue = $userId;
+@@ -335,7 +333,6 @@ class User_Model extends CI_Model {
+         }
+     }
+ 
+-
+     /*
+      * FACEBOOK LOGIN...
+      */
+@@ -447,7 +444,6 @@ class User_Model extends CI_Model {
+         }
+     }
+ 
+-
+     /**
+      * To check if Google Plus id exists or not
+      *
+@@ -744,23 +740,23 @@ class User_Model extends CI_Model {
+             if ($toUserId && $fromUserId) {
+                 $link = sha1(uniqid(rand(), TRUE));
+                 $mergeData = [
+-                    'iUserID'     => $userId,
+-                    'iToUserID'   => $toUserId,
++                    'iUserID' => $userId,
++                    'iToUserID' => $toUserId,
+                     'iFromUserID' => $fromUserId,
+-                    'vHash'       => $link,
+-                    'tCreatedAt'  => date('Y-m-d H:i:s'),
++                    'vHash' => $link,
++                    'tCreatedAt' => date('Y-m-d H:i:s'),
+                 ];
+ 
+                 $this->load->model("merge_model", "merge_model");
+-                if($this->merge_model->createMergeLink($mergeData)) {
++                if ($this->merge_model->createMergeLink($mergeData)) {
+                     //SEND A MAIL...
+                     $subject = 'Verification mail to merge account';
+                     $this->load->model("smtpmail_model", "smtpmail_model");
+                     $param = array(
+                         '%MAILSUBJECT%' => 'HungerMafia : ' . $subject,
+-                        '%LOGO_IMAGE%'  => BASEURL . '/images/hungermafia.jpg',
+-                        '%USER_NAME%'   => @$fullName,
+-                        '%LINK%'        => WEB_USER_MERGE . $link
++                        '%LOGO_IMAGE%' => BASEURL . '/images/hungermafia.jpg',
++                        '%USER_NAME%' => @$fullName,
++                        '%LINK%' => WEB_USER_MERGE . $link
+                     );
+ 
+                     $tmplt = DIR_VIEW . 'email/merge_verify.php';
+@@ -791,23 +787,23 @@ class User_Model extends CI_Model {
+             if ($toUserId && $fromUserId) {
+                 $link = sha1(uniqid(rand(), TRUE));
+                 $mergeData = [
+-                    'iUserID'     => $userId,
+-                    'iToUserID'   => $toUserId,
++                    'iUserID' => $userId,
++                    'iToUserID' => $toUserId,
+                     'iFromUserID' => $fromUserId,
+-                    'vHash'       => $link,
+-                    'tCreatedAt'  => date('Y-m-d H:i:s'),
++                    'vHash' => $link,
++                    'tCreatedAt' => date('Y-m-d H:i:s'),
+                 ];
+ 
+                 $this->load->model("merge_model", "merge_model");
+-                if($this->merge_model->createMergeLink($mergeData)) {
++                if ($this->merge_model->createMergeLink($mergeData)) {
+                     //SEND A MAIL...
+                     $subject = 'Verification mail to merge your account';
+                     $this->load->model("smtpmail_model", "smtpmail_model");
+                     $param = array(
+                         '%MAILSUBJECT%' => 'HungerMafia : ' . $subject,
+-                        '%LOGO_IMAGE%'  => BASEURL . '/images/hungermafia.jpg',
+-                        '%USER_NAME%'   => @$fullName,
+-                        '%LINK%'        => WEB_USER_MERGE . $link
++                        '%LOGO_IMAGE%' => BASEURL . '/images/hungermafia.jpg',
++                        '%USER_NAME%' => @$fullName,
++                        '%LINK%' => WEB_USER_MERGE . $link
+                     );
+ 
+                     $tmplt = DIR_VIEW . 'email/merge_verify.php';
+@@ -943,7 +939,6 @@ class User_Model extends CI_Model {
+                  * NEED TO ADD CATEGORY RECORDS...
+                  */
+                 //$this->_addUserCIMValues($userId, 'category', $userCategory);
+-
+                 //return $userMusic;
+                 $returnValue = $userId;
+             }
+@@ -1208,20 +1203,20 @@ class User_Model extends CI_Model {
+      */
+     function getUserReviews($userId) {
+         try {
+-            $sql  = 'SELECT trr.iReviewID AS reviewId, trr.iRestaurantID AS restaurantId, tr.vRestaurantName AS restaurantName,';
++            $sql = 'SELECT trr.iReviewID AS reviewId, trr.iRestaurantID AS restaurantId, tr.vRestaurantName AS restaurantName,';
+             $sql .= ' TRUNCATE((trr.iAmbience + trr.iPrice + trr.iFood + trr.iService) /8, 2 ) AS rating,';
+             $sql .= ' tr.eStatus AS restStatus, trr.tReviewDetail AS ratingReview, trr.tModifiedAt AS modifiedAt,';
+             $sql .= ' CONCAT("' . BASEURL . 'images/restaurant/", IF(tr.vRestaurantLogo = \'\', "default.png", CONCAT(tr.iRestaurantID,\'/\',tr.vRestaurantLogo)) ) AS restaurantImage,';
+             $sql .= ' CONCAT("' . BASEURL . 'images/restaurant/", IF(tr.vRestaurantLogo = \'\', "default.png", CONCAT(tr.iRestaurantID,\'/thumb/\',tr.vRestaurantLogo)) ) AS restaurantThumbImage';
+             $sql .= ' FROM  `tbl_restaurant_review` AS  `trr`';
+             $sql .= ' LEFT JOIN  `tbl_restaurant` AS  `tr` ON  `trr`.`iRestaurantID` =  `tr`.`iRestaurantID`';
+-            $sql .= ' WHERE iUserID = '.$userId.' AND trr.eStatus = "active"';
++            $sql .= ' WHERE iUserID = ' . $userId . ' AND trr.eStatus = "active"';
+             $res = $this->db->query($sql);
+             if ($res->num_rows() > 0) {
+                 $this->load->model("restaurant_model", "restaurant_model");
+                 $result = $res->result_array();
+-                for($i=0; $i<count($result); $i++) {
+-                    $data =  $this->restaurant_model->getRestaurantUserImages($result[$i]['restaurantId'], $result[$i]['restaurantImage'], $result[$i]['restaurantThumbImage']);
++                for ($i = 0; $i < count($result); $i++) {
++                    $data = $this->restaurant_model->getRestaurantUserImages($result[$i]['restaurantId'], $result[$i]['restaurantImage'], $result[$i]['restaurantThumbImage']);
+                     $result[$i]['images'] = $data['images'];
+                     $result[$i]['thumbImage'] = $data['thumbImages'];
+                 }
+@@ -1547,14 +1542,14 @@ class User_Model extends CI_Model {
+                 $sql .= ' LEFT JOIN `tbl_facility` AS `tf` ON `tf`.`iFacilityID` = `trf`.`iFacilityID`';
+ 
+                 $sql .= ' LEFT JOIN `tbl_restaurant_review` AS `trr` ON `trr`.`iRestaurantID` = `tr`.`iRestaurantID`';
+-                $sql .= ' WHERE `tr`.eStatus = "Active" AND `turf`.iUserID = "247"';
++                $sql .= ' WHERE `tr`.eStatus = "Active" AND `turf`.iUserID = '.$userId;
+                 $sql .= ' GROUP BY `tr`.`iRestaurantID`';
+ 
+ 
+                 //CONCAT("' . BASEURL . 'images/restaurant/", IF(tr.vRestaurantLogo = \'\', "default.png", CONCAT(tr.iRestaurantID,\'/\',tr.vRestaurantLogo)) ) AS restaurantImage
+                 $result = $this->db->query($sql)->result_array();
+                 $restaurantData = [];
+-                foreach($result as $data) {
++                foreach ($result as $data) {
+                     $minTime = $data['restaurantMinTime'];
+                     $maxTime = $data['restaurantMaxTime'];
+                     $timeSlot = $this->getRestaurantTimeSlot($minTime, $maxTime);
+@@ -1649,7 +1644,56 @@ class User_Model extends CI_Model {
+             }
+         }
+     }
++
++    function userList($data) {
++        try {
++            $limit = 5;
++            $fields[] = 'tbl_user.vFullName AS name';
++            $fields[] = 'IF(tbl_user.vProfilePicture = "" , CONCAT("' . USER_IMG . 'dM.png"), CONCAT("' . USER_IMG . '", tbl_user.iUserID, "/thumb/", tbl_user.vProfilePicture)) AS userProfile';
++            $fields = implode(',', $fields);
++            $sql = 'SELECT '.$fields;
++            $sql .= ' FROM `tbl_user` ';
++            
++            $con = '';
++            if (!empty($data['name'])) { //add the parameter check here
++                $con = ' WHERE ';
++            }
++            if (!empty($data['name'])) {
++                $con .= ' vFullName LIKE "%' . $data['name'] . '%" ';
++            }
++            $sql .= $con;
++            $sql .= ' ORDER BY iUserID desc';
++            $sql .= ' LIMIT ' . $limit;
++
++            return $this->db->query($sql)->result_array();
++        } catch (Exception $ex) {
++            throw new Exception('Error in userList function - ' . $ex);
++        }
++    }
++    
++    function getFollowersAndFollowing($userId = '') {
++        try {
++            $count = array();
++            if ($userId != '') {
++                $sql = "SELECT count(1) as followerCount from tbl_followers where iUserID = ".$userId ." and eFollow = 'yes'";
++                $countRec = $this->db->query($sql)->row_array();;
++                $followerCount = (int) $countRec['followerCount'];
++                
++                $sql1 = "SELECT count(1) as followingCount from tbl_followers where iFollowerUserID = ".$userId ." and eFollow = 'yes'";
++                $countRec1 = $this->db->query($sql1)->row_array();
++                $followingCount = (int) $countRec1['followingCount'];
++                
++                $count['followers'] = $followerCount;
++                $count['following'] = $followingCount;
++            }
++            return $count;
++        } catch (Exception $ex) {
++            throw new Exception('Error in getFollowers function - ' . $ex);
++        }
++    }
++
+ }
++
+ //name, logo, location(localtiy, city), cost for 2, category,cuisines, facility, ratings
+ 
+ //, offers, , view reviews, view images, open/closed

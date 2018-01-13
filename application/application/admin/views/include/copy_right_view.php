@@ -1,0 +1,1 @@
+<div class="margin-top-bottom-20">Copyright &copy; <?= date('Y'); ?> reserved by Foodine.</div>

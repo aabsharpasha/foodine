@@ -1,0 +1,234 @@
+.chatback{
+    background-color: #5e87b0;
+    border-bottom: 1px solid #507aa4;
+    color: #ffffff !important;
+}
+.borderright1{
+    border-left: 4px solid #5e87b0;
+}
+.borderright1 a{
+    color:#5e87b0;
+}
+.borderright1 a:hover{
+    color:#5e87b0 !important;
+}
+.minwidth250{
+    min-width: 250px;
+    max-width: 250px;
+}
+.chat-list img{
+    border-radius: 33px !important;
+}
+.maxwidth900{
+    max-width: 900px;
+    min-width: 900px;
+    display: table;
+}
+.maxwidth64{
+    max-width: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+.activeshadow{
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+}
+.userlist{
+    background-color: #dbdbdb !important;
+}
+.borderrightnone{
+    border-right: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+.chat-window{
+    border-top-left-radius: 0 !important;
+}
+.padding0{
+    padding: 0;
+}
+.textcentre{
+    text-align: center;
+}
+.borderbottom000{
+    border-bottom: 1px solid #000;
+}
+.maxwidth700{
+    max-width: 700px;
+}
+.login-box{
+    margin-bottom: 0 !important;
+}
+.width100{
+    width: 100%;
+}
+.colorfff{
+    color:  #fff;
+}
+.chattext{
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding: 10px;
+}
+.padding5{
+    display: table;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+.crspointer{
+    cursor: pointer;
+}
+.paddingtopbottom10
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.userlistname{
+    font-weight: bold;
+}
+.userlistname:hover,.userlistname:focus,.userlistname:active{
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+.colorfff{
+    color: #fff;
+}
+.crspointer:hover{
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+.bordertop2{
+    border: 2px solid #FFF;
+}
+.borderleftright2{
+    border-left: 2px solid #fff; 
+    border-right: 2px solid #fff; 
+}
+.login-box{
+    margin-bottom: 0 !important;
+}
+.marginright10{
+    margin-right: 10px;
+}
+.margintop10{
+    margin-top: 10px;
+}
+.td{
+    text-align: center !important;
+}
+.borderradius0{
+    border-radius: 0 !important;	
+}
+.control-label{
+    /*text-align: center !important;*/
+}
+.maxwidth500{
+    max-width: 500px;
+}
+.required{
+    color: red;
+}
+.margin0auto{
+    margin: 0 auto !important;
+}
+.disptable{
+    display: table;
+}
+.error{
+    color: red;
+    display: block;
+    clear: both;
+}
+.marginright20
+{
+    margin-right: 20px;
+}
+.paddingtopbottom5{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.passtohide{
+    display: none;
+}
+#alert{
+    margin-left: 0px;
+    cursor: pointer;
+    animation:vibrate 0.1s linear 0s infinite ;
+    -moz-animation: vibrate 0.1s linear 0s infinite ; /* Firefox */
+    -webkit-animation: vibrate 0.1s linear 0s infinite ; /* Safari and Chrome */
+    -o-animation: vibrate 0.1s linear 0s infinite ; /* Opera */
+}
+.margin-top-bottom-20{margin: 20px 0;}
+@keyframes vibrate{
+    0% {margin-left: 0px;}
+    25% {margin-left: -3px;}
+    50% {margin-left: 0px;}
+    75% {margin-left: 3px;}
+    100% {margin-left: 0px;}
+}
+
+@-moz-keyframes vibrate {
+    0% {margin-left: 0px;}
+    25% {margin-left: -3px;}
+    50% {margin-left: 0px;}
+    75% {margin-left: 3px;}
+    100% {margin-left: 0px;}
+}
+@-webkit-keyframes vibrate  {
+    0% {margin-left: 0px;}
+    25% {margin-left: -3px;}
+    50% {margin-left: 0px;}
+    75% {margin-left: 3px;}
+    100% {margin-left: 0px;}
+}
+@-o-keyframes vibrate {
+    0% {margin-left: 0px;}
+    25% {margin-left: -3px;}
+    50% {margin-left: 0px;}
+    75% {margin-left: 3px;}
+    100% {margin-left: 0px;}
+}
+.ui-icon, .ui-widget-content .ui-icon{background-image: none !important;}
+.ui-state-default .ui-icon{background-image: none !important;}
+.dataTables_wrapper{
+    overflow-x: hidden !important; /*scroll;*/
+}
+.bootbox-close-button.close{
+    margin: 10px !important;
+    font-size: 20px;
+    padding: 0px;
+}
+.bootbox-body{
+    margin: 5px !important;
+    padding: 0px 10px !important;
+}
+.pos-relative{
+    position: relative !important;
+} .pos-relative img{
+    width: 100%;
+}
+.text-justify{
+    text-align: justify !important;
+}
+.padding-top-0{
+    padding-top: 0 !important;
+}
+.padding-left-15{
+    padding-left: 15px;
+}
+.margin-top-10{
+    margin-top: 10px !important;
+}
+.currency-input-div{
+    padding:0px 0px !important;
+}
+.currency-span{width:10%;height:30px;padding-left: 12px;padding-right: 5px;}
+.currency-input{
+    display:inline-block !important;
+    width:80% !important;
+    height:32px !important;
+    border:none !important;
+}

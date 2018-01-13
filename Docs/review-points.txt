@@ -1,0 +1,7 @@
+1) Check the Sponsors spelling in sponsor controller.
+2) Define the meaningfull variable name in user.php
+3) Visibility is not declared for all methods. Declare the visiblility for pulic methods.
+4) Add the comments for all the methods.
+5) Avoid the mutiple for loops in restaurant controller.
+6) Define the constants for all the messages.
+7) Add the alias name for all the table query.

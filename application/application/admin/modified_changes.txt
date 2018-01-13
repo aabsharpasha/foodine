@@ -1,0 +1,89 @@
+================================================================================
+# DATE  :   19-01-2013  
+================================================================================
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# CHANGES...
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#STATUS |   #TASK
+--------------------------------------------------------------------------------
+DONE    |   Restaurant details have option to add music and facility too.
+--------------------------------------------------------------------------------
+DONE    |   Open & Closing Times & Days. 
+--------------------------------------------------------------------------------
+DONE    |   Price Range. 
+--------------------------------------------------------------------------------
+DONE    |   Specialty. 
+--------------------------------------------------------------------------------
+DONE    |   4 Numbers & 2 Email Address.
+--------------------------------------------------------------------------------
+DONE    |   List view show phone numbers.
+--------------------------------------------------------------------------------
+DONE    |   Content Management has some error [ DATA-TABLE NOT SHOWING THE 
+        |   RECORDS ] - Also Show limited text content [ Lorem Epsum... ].
+--------------------------------------------------------------------------------
+
+================================================================================
+# DATE  :   20-01-2013  
+================================================================================
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# MODULE...
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#STATUS |   #TASK
+--------------------------------------------------------------------------------
+DONE    |   Distinguish between ADMIN and RESTAURANT USER...
+        |   Left Side-bar should be hide [ ALLOW LIMITED OPTIONS... ].
+--------------------------------------------------------------------------------
+DONE    |   List the DEALS Records in Deals Management... 
+--------------------------------------------------------------------------------
+DONE    |   Delete & Active / Inactive functionality in Deals Management... 
+--------------------------------------------------------------------------------
+DONE    |   Add / Edit functionality in Deals Management... 
+--------------------------------------------------------------------------------
+DONE    |   Upload all the changes to the server... 
+--------------------------------------------------------------------------------
+
+================================================================================
+# DATE  :   21-01-2013  
+================================================================================
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# MODULE...
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#STATUS |   #TASK
+--------------------------------------------------------------------------------
+DONE    |   Add / Edit / Delete functionality in Booking Management...
+--------------------------------------------------------------------------------
+DONE    |   Add / Edit / Delete functionality in Reward Management...
+--------------------------------------------------------------------------------
+
+QUERY
+
+ALTER TABLE `tbl_reward_collect` ADD INDEX(`iRewardPointID`);
+ALTER TABLE `tbl_reward_collect` ADD FOREIGN KEY (`iRewardPointID`) REFERENCES `stylekar_blacklist`.`tbl_reward_point`(`iRewardPointID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tbl_reward_collect` ADD INDEX(`iUserID`);
+ALTER TABLE `tbl_reward_collect` ADD FOREIGN KEY (`iUserID`) REFERENCES `stylekar_blacklist`.`tbl_user`(`iUserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tbl_booking` ADD INDEX(`iRestaurantID`);
+ALTER TABLE `tbl_booking` ADD FOREIGN KEY (`iRestaurantID`) REFERENCES `stylekar_blacklist`.`tbl_restaurant`(`iRestaurantID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tbl_booking` ADD INDEX(`iUserID`);
+ALTER TABLE `tbl_booking` ADD FOREIGN KEY (`iUserID`) REFERENCES `stylekar_blacklist`.`tbl_user`(`iUserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tbl_qrcode` ADD INDEX(`iRestaurantID`);
+ALTER TABLE `tbl_qrcode` ADD FOREIGN KEY (`iRestaurantID`) REFERENCES `stylekar_blacklist`.`tbl_restaurant`(`iRestaurantID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tbl_deals` ADD `tOfferDetail` TEXT NOT NULL AFTER `vOfferText`;
+ALTER TABLE `tbl_deals` ADD `vDaysAllow` VARCHAR(255) NOT NULL AFTER `tTermsOfUse`;
+
+ALTER TABLE `tbl_reward_request` ADD INDEX(`iRewardID`);
+ALTER TABLE `tbl_reward_request` ADD INDEX(`iUserID`);
+ALTER TABLE `tbl_reward_request` ADD FOREIGN KEY (`iRewardID`) REFERENCES `stylekar_blacklist`.`tbl_reward`(`iRewardID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `tbl_reward_request` ADD FOREIGN KEY (`iUserID`) REFERENCES `stylekar_blacklist`.`tbl_user`(`iUserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tbl_user_ratting` ADD INDEX(`iRestaurantID`);
+ALTER TABLE `tbl_user_ratting` ADD INDEX(`iUserID`);
+
+ALTER TABLE `tbl_user_ratting` ADD FOREIGN KEY (`iRestaurantID`) REFERENCES `stylekar_blacklist`.`tbl_restaurant`(`iRestaurantID`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `tbl_user_ratting` ADD FOREIGN KEY (`iUserID`) REFERENCES `stylekar_blacklist`.`tbl_user`(`iUserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+

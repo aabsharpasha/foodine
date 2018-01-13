@@ -1,0 +1,4 @@
+<?php
+
+$lang['ERR'] = 'Error';
+?>

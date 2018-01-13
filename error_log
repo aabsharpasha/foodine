@@ -1,0 +1,8 @@
+[06-Apr-2017 21:17:04 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/mistralg/public_html/foodine.in/contact.php on line 7
+[07-Apr-2017 18:24:50 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/mistralg/public_html/foodine.in/contact.php on line 7
+[23-Apr-2017 09:06:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/foodine/public_html/contact.php on line 7
+[23-Apr-2017 19:59:30 UTC] PHP Parse error:  syntax error, unexpected 'privacy' (T_STRING) in /home/foodine/public_html/twitter_privacy.php on line 3
+[23-Apr-2017 19:59:33 UTC] PHP Parse error:  syntax error, unexpected 'privacy' (T_STRING) in /home/foodine/public_html/twitter_privacy.php on line 3
+[23-Apr-2017 19:59:41 UTC] PHP Parse error:  syntax error, unexpected 'privacy' (T_STRING) in /home/foodine/public_html/twitter_privacy.php on line 3
+[23-Apr-2017 19:59:43 UTC] PHP Parse error:  syntax error, unexpected 'privacy' (T_STRING) in /home/foodine/public_html/twitter_privacy.php on line 3
+[23-Apr-2017 19:59:46 UTC] PHP Parse error:  syntax error, unexpected 'privacy' (T_STRING) in /home/foodine/public_html/twitter_privacy.php on line 3

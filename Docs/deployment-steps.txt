@@ -1,0 +1,12 @@
+1) Update dev branch.
+2) Merge dev branch in master branch
+3) Resolve the conflict if any.
+4) Take backup of main files (config) from production
+5) Update DB queries on production.
+6) Solr related changes (if any).
+7) Take pull in master branch on production.
+8) Update the changes in constants files.
+9) Chcek all the fb/google/g+ setting files.
+10) Composer update.
+11) Permission to required folder (images etc).
+12) Go through the site/apis, all must be working fine.
