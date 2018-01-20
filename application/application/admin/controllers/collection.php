@@ -54,7 +54,7 @@ class Collection extends CI_Controller {
                             'fileType' => 'image',
                             'maxSize' => 20,
                             'uploadFor' => array(
-                                'key' => 'collection',
+                                'key' => 'cuisine',
                                 'id' => $collectionEdit
                             ),
                             'requireThumb' => TRUE
@@ -96,7 +96,7 @@ class Collection extends CI_Controller {
                     'fileType' => 'image',
                     'maxSize' => 20,
                     'uploadFor' => array(
-                        'key' => 'collection',
+                        'key' => 'cuisine',
                         'id' => $iCollectionID
                     ),
                     'requireThumb' => TRUE
