@@ -23,7 +23,7 @@ class Notification_Model extends CI_Model {
             "tpn.eLink AS eLink",
             "tpn.vImage AS vImage",
             "tScheduleDate",
-            "DATE_FORMAT(tpn.tScheduleDate ,'%d %b %Y %h:%i %p') AS scheduleDate",
+            "DATE_FORMAT(tpn.tCreatedAt ,'%d %b %Y %h:%i %p') AS scheduleDate",
             "tpn.eStatus AS eStatus",
             "DATE_FORMAT(tCreatedAt ,'%d %b %Y %h:%i %p') AS tCreatedAt",
             "tpn.iPushNotifyID AS iPushNotifyID",
