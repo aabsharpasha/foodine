@@ -891,8 +891,10 @@ class Tablebooking_Model extends CI_Model {
                                 if($appliedOfferCode) {
                                     $offer_text = 'Offer code:'.$appliedOfferCode.' is applied.';
                                 }
-                                $msg = 'Hi! Your booking ('.$returnArr['orderId'].') at '.$restaurantName["vRestaurantName"].' for '.date("h:i A", $bookingDateTime/1000).' on '.date("d-m-Y", $bookingDateTime/1000).' with '.$peopleCount.' guests  and order is CONFIRMED. '.$offer_text.' Contact the Restaurant MOBILE at '.$restaurantName["vContactNo"].' Happy dining!';
-                                $userDetails = $this->general_model->getUserBasicRecordById($userId);
+                                // $msg = 'Hi! Your booking ('.$returnArr['orderId'].') at '.$restaurantName["vRestaurantName"].' for '.date("h:i A", $bookingDateTime/1000).' on '.date("d-m-Y", $bookingDateTime/1000).' with '.$peopleCount.' guests  and order is CONFIRMED. '.$offer_text.' Contact the Restaurant MOBILE at '.$restaurantName["vContactNo"].' Happy dining!';
+                                // $userDetails = $this->general_model->getUserBasicRecordById($userId);
+                                 $msg = 'Hi '.$bookingName.' we will update you shortly about the status of your reservation request for '.$restaurantName["vRestaurantName"].' for '.date("h:i A", $bookingDateTime/1000).', '. date("d-m-Y", $bookingDateTime/1000).' with '.$peopleCount.' guests . (Ref: '.$bookingId.'). You can call us on +918264127275 for any queries.';
+                                $this->load->model('Sms_model', 'sms_m');
                                 $this->load->model('Sms_model', 'sms_m');
                                 //$msg = 'test';
                                 
