@@ -1144,7 +1144,7 @@ class User_Model extends CI_Model {
                         $this->load->model('smtpmail_model');
                         $param = array(
                             '%MAILSUBJECT%' => 'Foodine : Forgot Password',
-                            '%LOGO_IMAGE%' => UPLOADS . '/images/logo.png',
+                            '%LOGO_IMAGE%' => 'http://foodine.in/public/logo.png',
                             '%USER_NAME%' => $record['vFirstName'],
                             '%LINK%' => WEB_USER_FORGOT_PASSWORD . $link
                                 //'%NEW_PASSWORD%' => $random

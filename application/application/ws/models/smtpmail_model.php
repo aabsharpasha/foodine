@@ -87,12 +87,12 @@ class SMTPMail_Model extends CI_Model {
                 }
             }
 
-            //mprd($this->email);
+           // mprd($this->email);
 
             if ($this->email->send()) {
                 return 1;
             } else {
-                //show_error($this->email->print_debugger());
+                show_error($this->email->print_debugger());
             }
         } catch (Exception $ex) {
             exit('SMTPMail Model : Error in send function - ' . $ex);

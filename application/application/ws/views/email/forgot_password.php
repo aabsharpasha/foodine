@@ -440,7 +440,7 @@
                     <tr>   
                         <td style="font-family:verdana;font-size:16px;line-height:1.3em;text-align:left;padding:1px 15px;background:none repeat scroll 0px 0px rgb(230,230,230);color:#dd8006" align="left">  
                             <p style="margin-bottom:0px">  
-                                <img id="4140330000000131001_imgsrc_url_0_t" style="min-height:60px;margin:10px" src="%LOGO_IMAGE%">  
+                                <img id="4140330000000131001_imgsrc_url_0_t" style="min-height:40px;margin:10px" style="height:100px;" src="%LOGO_IMAGE%">  
                             </p>  
                         </td>   
                     </tr>  

@@ -1120,6 +1120,7 @@ class User extends REST_Controller {
         if($USERDATA['userAnniversary']) {
          $response['anniversary'] = $USERDATA['userAnniversary'];
         }
+         $response['registrationType'] = $this->post('registrationType');
         $this->response($response, 200);
     }
 

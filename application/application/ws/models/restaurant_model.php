@@ -2005,7 +2005,8 @@ class Restaurant_Model extends CI_Model {
                         'CONCAT("' . BASEURL . 'images/restaurantMobile/", IF(tr.vRestaurantMobLogo = \'\', "default.jpeg", CONCAT(tr.iRestaurantID,\'/\',tr.vRestaurantMobLogo)) ) AS restaurantImage',
 //                        'tbd.vOfferText AS offer',
                         'IFNULL((SELECT tbd.vOfferText FROM tbl_deals tbd WHERE ttb.iDealID = tbd.iDealID),0) AS offer',
-                        'IF((SELECT count(tbd.vOfferText) FROM tbl_deals tbd WHERE ttb.iDealID = tbd.iDealID)=0,"0 Offer","1 Offer") AS offerCount',
+  //                      'IF((SELECT count(tbd.vOfferText) FROM tbl_deals tbd WHERE ttb.iDealID = tbd.iDealID)=0,"0 Offer","1 Offer") AS offerCount',
+"IF(appliedOfferCode = '',0,1) as offerCount",
                     );
 
 
@@ -5691,6 +5692,7 @@ class Restaurant_Model extends CI_Model {
                             $condition[] = 'tr.iRestaurantID = turv.iRestaurantID';
                             $condition[] = 'turv.iUserID = "' . $userId . '"';
                             $orderBy = ' ORDER BY turv.tModifiedAt DESC ';
+                            $limit = ' limit 20';
                         }
                         break;
                     case 'category' :

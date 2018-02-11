@@ -402,8 +402,10 @@ class Restaurant extends REST_Controller {
                $resp['dressCode'] = $resDetail['info']['dressCode'];
               //$resp['costOf2PeopleTip'] = $resDetail['info']['costDescription'];
               $resp['costOf2PeopleTip'] = $resDetail['info']['costDescription'];
-              
-              $resp['costOf2People'] = array($resDetail['info']['isAlcohol'].' '.$resDetail['info']['restaurantPriceValue'], '');
+              $resp['costOf2People'] = array();
+              if(trim(str_replace('Rs. ','',$resDetail['info']['restaurantPriceValue']))) {
+                $resp['costOf2People'] = array($resDetail['info']['isAlcohol'].' '.$resDetail['info']['restaurantPriceValue']);
+              }
               $resp['restaurantPriceValue'] = $resDetail['info']['restaurantPriceValue'];
               $resp['openingHours'] = array();
               foreach($resDetail['info']['restaurantOpenDays'] as $openLine) {
