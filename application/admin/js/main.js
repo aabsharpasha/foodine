@@ -418,6 +418,7 @@ function onlyNumeric(a) {
 
 
 function playSound(filename){  
+ 
     //filename = 'http://localhost/foodine/assets/js/'+filename;
     filename = 'http://foodine.in/application/images/'+filename;
     document.getElementById("sound").innerHTML='<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
