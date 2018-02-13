@@ -134,7 +134,7 @@
 
                                                                 <tr><td height="22"><img width="1" height="1" alt="" src="%BASEURL%images/email_images/blank.gif"></tr>         
                                                                             <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #000; font-weight: 600;">Cheers,</td></tr> 
-                                                                            <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #000; font-weight: 600;">Team HungerMafia</td></tr>
+                                                                            <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #000; font-weight: 600;">Team foodine</td></tr>
                                                                             </table>  
                                                                     </td>  
                                                                 </tr>

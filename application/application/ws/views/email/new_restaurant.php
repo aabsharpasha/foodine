@@ -276,7 +276,7 @@
                                         <td stytle="font-family:verdana;font-size:13px;line-height:1.3em;text-align:left;padding:15px">    
                                             <p style="color:#8d8d8d">
                                                 <h2> Hello,</h2>
-                                                <br/><br/>Thank you for collaborating with Hungermafia. I wish to express my sincere gladness 
+                                                <br/><br/>Thank you for collaborating with foodine. I wish to express my sincere gladness 
                                                 <br/>for our agreement. It is really a great honour to cooperate with you. I wish to thank you for 
                                                 <br/>considering us as partners and I am sure we are going to bring our companies to the new levels 
                                                 <br/>through our cooperation. 
@@ -293,10 +293,10 @@
                                                     <li>Checking Booking request</li>
                                                     <li>Accept/reject Booking request</li>
                                                 </ul>
-                                                <p>Happy to hear from you! If any further queries please email us on <a href="mailto:info@hungermafia.com">info@hungermafia.com</a> </p>
+                                                <p>Happy to hear from you! If any further queries please email us on <a href="mailto:info@foodine.com">info@foodine.com</a> </p>
                                             </p>
                                             <p>  Thanks,
-                                                <br/>HungerMafia Team
+                                                <br/>foodine Team
                                             </p>  
                                         </td>  
                                     </tr>  

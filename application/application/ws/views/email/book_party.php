@@ -132,7 +132,7 @@
                                                    <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.4; color: #333; text-align: center;">Every occasion in life is to be celebrated and we know exactly where you can do that. We want you to party till you drop and for that our experts are working on brining you the best locations and deals! Hold on tight! </td></tr>
                                                    <tr><td height="85"><img width="1" height="1" alt="" src="%BASEURL%images/email_images/blank.gif"></tr>  
                                                    <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #333; font-weight: 600;">Cheers,</td></tr> 
-                                                   <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #333; font-weight: 600;">Team HungerMafia</td></tr>
+                                                   <tr><td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #333; font-weight: 600;">Team foodine</td></tr>
                                                    <tr><td height="13"><img width="1" height="1" alt="" src="%BASEURL%images/email_images/blank.gif"></tr>
                                                 </table>   
                                             </td>
@@ -144,7 +144,7 @@
                                                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                                     <tr>
                                                      <td width="27"><img src="%BASEURL%images/email_images/core-left.jpg" alt=""></td>
-                                                     <td style="font-family: Arial, Helvetica, sans-serif; font-size: 8px; line-height: 20px; color: #fff;">For help, please email us at <a href="#" style="color: #fff;">Support@hungermafia.com</a> / Call : 1800-11-8200</td>
+                                                     <td style="font-family: Arial, Helvetica, sans-serif; font-size: 8px; line-height: 20px; color: #fff;">For help, please email us at <a href="#" style="color: #fff;">Support@foodine.com</a> / Call : 1800-11-8200</td>
                                                      <td width="25"><img src="%BASEURL%images/email_images/core-right.jpg" alt=""></td>
                                                     </tr>  
                                                 </table>  

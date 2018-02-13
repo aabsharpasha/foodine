@@ -279,7 +279,7 @@
                                                 <h3> You have a new request for change message from %VENDOR_NAME%.</h3>
                                                 <br/>%REQUEST_TEXT%
                                             </p>
-                                            <p>Thanks,<br/>HungerMafia Team</p>
+                                            <p>Thanks,<br/>foodine Team</p>
                                         </td>  
                                     </tr>  
                                 </tbody>

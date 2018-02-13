@@ -452,13 +452,13 @@
                                         <td style="font-family:verdana;font-size:13px;line-height:1.3em;text-align:left;padding:15px">    
                                             <p style="color:#8d8d8d">
                                                 <h2> Dear %USER_NAME%,</h2>
-                                                <br/><br/>Thank you for choosing HungerMafia.
+                                                <br/><br/>Thank you for choosing foodine.
                                                 <br/>Please activate your account by clicking this link - <a href="%LINK%">Activate</a>
                                                 <br/>
-                                                <p><small>Happy to hear from you! If any further queries please email us on <a href="mailto:info@hungermafia.com"> info@hungermafia.com</a> </small></p>
+                                                <p><small>Happy to hear from you! If any further queries please email us on <a href="mailto:info@foodine.com"> info@foodine.com</a> </small></p>
                                             </p>
                                             <p>  Thanks,
-                                                <br/>HungerMafia Team
+                                                <br/>foodine Team
                                             </p>  
                                         </td>  
                                     </tr>  

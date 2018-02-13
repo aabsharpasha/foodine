@@ -277,14 +277,14 @@
                                             <p style="color:#8d8d8d">
                                                 <h2> Hello,</h2>
                                                 <br/><br/>Thank you for selecting Hunger Mafia. Your Order Number : %ORDER_ID%, is successfully placed. 
-                                                <br /> Please email us on support@hungermafia.com for any queries related to your order. 
+                                                <br /> Please email us on support@foodine.com for any queries related to your order. 
                                             </p>
                                             <p>
                                                 <h5> Your Order Details</h5>
                                                 <p>%DATA%</p>
                                             </p>
                                             <p>  Thanks,
-                                                <br/>HungerMafia Team
+                                                <br/>foodine Team
                                             </p>  
                                         </td>  
                                     </tr>  

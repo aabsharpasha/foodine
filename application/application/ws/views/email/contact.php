@@ -278,7 +278,7 @@
                                                 <h2> Hello,</h2>
                                                 <br/><br/>%DATA%</p>
                                             <p>  Thanks,
-                                                <br/>HungerMafia Team
+                                                <br/>foodine Team
                                             </p>  
                                         </td>  
                                     </tr>  

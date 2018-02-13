@@ -458,7 +458,7 @@
                                                 <p><small>Happy to hear from you! If any further queries please email us on <a href="mailto:info@foodine.com"> info@foodine.com</a> </small></p>
                                             </p>
                                             <p>  Thanks,
-                                                <br/>Foodine Team
+                                                <br/>foodine Team
                                             </p>  
                                         </td>  
                                     </tr>  
