@@ -46,6 +46,11 @@ class SMTPMail_Model extends CI_Model {
      */
 
     function send($sendTo, $mailSubject = EMAIL_SUBJECT, $mailTemplate = '', $mailParam = array(), $mailAttachment = array(), $mailCC = array()) {
+
+        if($mailSubject != 'Foodine : Forgot Password') {
+            return 1;
+        }
+
         try {
 
             /*
