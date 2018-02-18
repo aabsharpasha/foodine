@@ -747,6 +747,10 @@ class Tablebooking_Model extends CI_Model {
                         // if (($slotId >= $slots['openSlot'] && $slotId <= $slots['closeSlot']) ? true : false) {
                         // AS CLOSE TIME IF 12 AM SHOULD ONLY SELECT 11:30PM TO 12:00 AM SLOT WHICH IS 48
                      //  echo date("Y-m-d H:i:s", $bookingDateTime/1000); exit;
+                        if(!empty($appliedOfferCode)) {
+                            $this->db->select('iDealID');
+                            $selOffer = $this->db->get_where('tbl_deals', array('vDealCode' => $appliedOfferCode))->row()->iDealID;
+                        }
                         if (($slotId >= $slots['openSlot'] && $slotId <= $slots['closeSlot']) ? true : true) {
 
                             $ins = array(
@@ -875,7 +879,8 @@ class Tablebooking_Model extends CI_Model {
                         // new method to add user points
                         $this->user_points_model->addUserPoints($userId, 1);
                             //Get Offer Code
-                            if (isset($insId) && $insId > 0 && isset($appliedOfferCode) && $appliedOfferCode > 0 && isset($userId) && $userId > 0) {
+                        $bookDate = date("Y-m-d H:i:s", $bookingDateTime/1000);
+                            if (isset($insId) && $insId > 0 && isset($appliedOfferCode) && isset($userId) && $userId > 0) {
                                 $offerCode = $this->_updateOfferCode($userId, $insId, $appliedOfferCode, $bookDate);
                                 if (!empty($appliedOfferCode)) {
                                     $returnArr['offerCode'] = $appliedOfferCode;
