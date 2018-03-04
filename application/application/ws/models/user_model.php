@@ -186,6 +186,22 @@ class User_Model extends CI_Model {
                
             }
 
+
+                        $this->load->model('smtpmail_model');
+                        $param = array(
+                            '%MAILSUBJECT%' => 'Foodine : Create Account',
+                            '%LOGO_IMAGE%' => 'http://foodine.in/public/logo.png',
+                            '%USER_NAME%' => $firstName,
+                            '%LINK%' => WEB_USER_FORGOT_PASSWORD . $link
+                                //'%NEW_PASSWORD%' => $random
+                        );
+                        $tmplt = DIR_VIEW . 'email/signup_verify.php';
+                        $subject = 'Welcome to Foodine!';
+                        $to = $email;
+                        if($to) {
+                             $this->smtpmail_model->send($to, $subject, $tmplt, $param);
+                        }
+
             return $userId;
         } catch (Exception $ex) {
             exit('User Model : Error in createAccount function - ' . $ex);

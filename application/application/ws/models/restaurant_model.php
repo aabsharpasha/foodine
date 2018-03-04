@@ -6111,6 +6111,7 @@ class Restaurant_Model extends CI_Model {
               $resRet['dishName'] = $resDetail['info']['restaurantSpeciality']['food'];
               $resRet['photoUrl'] = $resDetail['info']['restaurantImage'];
               $resRet['offers'] = array();
+              $resRet['type'] = 1;
               foreach($resDetail['restaurantDeals'] as $line) {
                  // print_r($line);
                   $resRet['offers'][]= array('description' => $line['offerText'], 'offerCode' => $line['dealCode']);
