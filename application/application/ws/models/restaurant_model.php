@@ -460,6 +460,7 @@ class Restaurant_Model extends CI_Model {
                 $defaultCostDesc = '"The cost for two is computed as follows: Average of 2 mid ranged Appetizers + 2 Mains + 2 Beverages + 1 Dessert. The actual cost you incur at a restaurant might change depending on your appetite, or with changes in restaurant menu prices."';
                 $fields[] = 'tr.iRestaurantID AS restaurantId';
                 $fields[] = 'tr.vRestaurantName AS restaurantName';
+                $fields[] = ' IF((select id from tbl_banquet_map where iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
 //                if ($platform == 'web') {
 //                    $fields[] = 'CONCAT("' . BASEURL . 'images/restaurantListing/", IF(tr.vRestaurantLogo = \'\', "defaultdetail.jpeg", CONCAT(tr.iRestaurantID,\'/\',tr.vRestaurantLogo)) ) AS restaurantImage';
 //                } else {
@@ -3488,6 +3489,7 @@ class Restaurant_Model extends CI_Model {
               $resRet['restaurantName'] = $resDetail['info']['restaurantName'];
               $resRet['dishName'] = $resDetail['info']['restaurantSpeciality']['food'];
               $resRet['photoUrl'] = $resDetail['info']['restaurantImage'];
+              $resRet['type'] = $resDetail['info']['isBanquet'] ? "banquet": '';
               
               $resRet['offers'] = array();
               foreach($resDetail['restaurantDeals'] as $line) {
@@ -5684,7 +5686,7 @@ class Restaurant_Model extends CI_Model {
                     $tbl = 'tbl_restaurant AS tr';
                     $fields .= 'tr.iRestaurantID AS restaurantId';
                 }
-
+$fields .= ', IF((select id from tbl_banquet_map where iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
                 switch ($searchType) {
                     case 'recentviewed':
                         if (isset($userId) && $userId != '') {
@@ -6005,7 +6007,7 @@ class Restaurant_Model extends CI_Model {
                     } 
                 }
               $resDetail = $this->getRestaurantDetail($rowData['restaurantId'], $userLat, $userLong, $userId, 'web');
-            // print_r($resDetail); exit;
+             //print_r($resDetail); exit;
               $resRet['id'] = $resDetail['info']['restaurantId'];
               $resRet['rating'] = $resDetail['info']['restaurantRatting'];
               $resRet['bookmarked'] = $resDetail['info']['isFavourite'] == 'yes' ? "true" : "false" ;
@@ -6015,6 +6017,7 @@ class Restaurant_Model extends CI_Model {
               $resRet['dishName'] = $resDetail['info']['restaurantSpeciality']['food'];
               $resRet['photoUrl'] = $resDetail['info']['restaurantImage'];
               $resRet['isOpen'] = $resDetail['info']['isOpenNow'] == 'Open' ? true : false ;
+              $resRet['type'] = $resDetail['info']['isBanquet']  ? 'banquet' : '' ;
               $resRet['offers'] = array();
               foreach($resDetail['restaurantDeals'] as $line) {
                  // print_r($line);
@@ -6064,6 +6067,7 @@ class Restaurant_Model extends CI_Model {
               $resRet['dishName'] = $resDetail['info']['restaurantSpeciality']['food'];
               $resRet['photoUrl'] = $resDetail['info']['restaurantImage'];
               $resRet['offers'] = array();
+              $resRet['type'] = $resDetail['info']['isBanquet']  ? 'banquet' : '' ;
               foreach($resDetail['restaurantDeals'] as $line) {
                  // print_r($line);
                   $resRet['offers'][]= array('description' => $line['offerText'], 'offerCode' => $line['dealCode']);
@@ -6111,7 +6115,7 @@ class Restaurant_Model extends CI_Model {
               $resRet['dishName'] = $resDetail['info']['restaurantSpeciality']['food'];
               $resRet['photoUrl'] = $resDetail['info']['restaurantImage'];
               $resRet['offers'] = array();
-              $resRet['type'] = 1;
+              $resRet['type'] = $resDetail['info']['isBanquet']  ? 'banquet' : '' ;
               foreach($resDetail['restaurantDeals'] as $line) {
                  // print_r($line);
                   $resRet['offers'][]= array('description' => $line['offerText'], 'offerCode' => $line['dealCode']);
