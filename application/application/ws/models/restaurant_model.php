@@ -1998,6 +1998,7 @@ class Restaurant_Model extends CI_Model {
                         'CASE WHEN ttb.eBookingStatus = "Cancel" THEN "Cancelled" ELSE ttb.eBookingStatus END AS bookingStatus',
                         'ttb.iPersonTotal AS totalPerson',
                         'ttb.tDateTime AS bookedDate',
+                        'UNIX_TIMESTAMP(ttb.tDateTime) AS bookingTime',
                         //'DATE_FORMAT(sm.tstartFrom,"%h:%i %p") AS slotTime',
 //                    'sm.tstartFrom AS slotTime',
                         'tr.iRestaurantID AS id',
@@ -2125,7 +2126,7 @@ class Restaurant_Model extends CI_Model {
                             if (trim($type) == 'history') {
                                 $value['offerCode'] = "";
                             }
-                            $value['bookedDate'] = strtotime($value['bookedDate']);
+                            $value['bookedDate'] = strtotime($value['bookedDate'])*1000;
                             $newArr[] = $value;
                             
                             //print_r($value); exit;
@@ -5685,8 +5686,11 @@ class Restaurant_Model extends CI_Model {
                 if ($searchType != 'category' && $searchType != 'cuisine' &&  $searchType != 'cuisinerest' && $searchType != 'collection' &&  $searchType != 'collectionrest') {
                     $tbl = 'tbl_restaurant AS tr';
                     $fields .= 'tr.iRestaurantID AS restaurantId';
+                    $fields .= ', IF((select id from tbl_banquet_map where iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
+                } else {
+                    //$fields .= 'IF((select id from tbl_banquet_map where iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
                 }
-$fields .= ', IF((select id from tbl_banquet_map where iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
+                
                 switch ($searchType) {
                     case 'recentviewed':
                         if (isset($userId) && $userId != '') {

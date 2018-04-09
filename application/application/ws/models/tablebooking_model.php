@@ -1177,7 +1177,7 @@ $rest_msg = 'Greetings! Booking Alert Customer Name: '.$name.' '
 
 
 
-                    $restaurantMobile = '8264127275';
+                    $restaurantMobile = '9696149696';
                     $preferredLocation = $location1.' '.$location2.' '.$location3;
                     $restaurants = $rest1.' '.$rest2.' '.$rest3;
                     $rest_msg = "Greetings! Booking Alert\n{$partyType}\nCustomer Name:{$bookingName}\nMobile no:{$mobileNumber}\nDate:{$bookingDate1}\nTime:{$bookingTime}\nNo of Guests:{$peopleCount}\nTable No:{$tableId}\nSpecial Requirement:{$specialRequest}\nPreffered Location: {$preferredLocation}Thanking you! Team Foodine";
