@@ -117,7 +117,7 @@
                     <td>
                         <table cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="#f58220" style="background:#f58220;">
                              <tr>
-                                <td><img src="%BASEURL%/images/banner2.jpg" alt=""></td>   
+                                <td><img src="%BASEURL%/images/banner2.png" alt=""></td>   
                              </tr>
                             <tr>
                                 <td>
