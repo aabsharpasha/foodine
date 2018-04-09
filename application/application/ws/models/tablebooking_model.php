@@ -898,7 +898,7 @@ class Tablebooking_Model extends CI_Model {
                                 }
                                 // $msg = 'Hi! Your booking ('.$returnArr['orderId'].') at '.$restaurantName["vRestaurantName"].' for '.date("h:i A", $bookingDateTime/1000).' on '.date("d-m-Y", $bookingDateTime/1000).' with '.$peopleCount.' guests  and order is CONFIRMED. '.$offer_text.' Contact the Restaurant MOBILE at '.$restaurantName["vContactNo"].' Happy dining!';
                                  $userDetails = $this->general_model->getUserBasicRecordById($userId);
-                                 $msg = 'Hi '.$bookingName.' we will update you shortly about the status of your reservation request for '.$restaurantName["vRestaurantName"].' at '.date("h:i A", $bookingDateTime/1000).', '. date("d-m-Y", $bookingDateTime/1000).' with '.$peopleCount.' guests . (Ref: '.$uniqueCode.'). You can call us on +918264127275 for any queries.';
+                                 $msg = 'Hi '.$bookingName.' we will update you shortly about the status of your reservation request for '.$restaurantName["vRestaurantName"].' at '.date("h:i A", $bookingDateTime/1000).', '. date("d-m-Y", $bookingDateTime/1000).' with '.$peopleCount.' guests . (Ref: '.$uniqueCode.'). You can call us on +919358393588 for any queries.';
                                 $this->load->model('Sms_model', 'sms_m');
                                 
                                 $mobiles = $userDetails['userMobile'];
@@ -934,6 +934,7 @@ $rest_msg = 'Greetings! Booking Alert Customer Name: '.$name.' '
                                 $rest['mobile'] = $restaurantMobile;
                                 $rest['msg'] = $rest_msg;
                                 $data1 = $this->sms_m->Send1($rest);
+                               
                                 $smsData = json_decode($data1);
 
                                     
