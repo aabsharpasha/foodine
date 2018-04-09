@@ -18,7 +18,7 @@ class Book extends CI_Controller {
         $viewData['title'] = "Book Table";
         $viewData['ACTION_LABEL'] = "Save";
 
-        if (isset($_POST) && !empty($_POST)) {
+       ok if (isset($_POST) && !empty($_POST)) {
             //$_POST['restaurant_id'] = $restaurant_id;
             /* just need to save to database */
             $resp = $this->book_model->book_table($_POST);

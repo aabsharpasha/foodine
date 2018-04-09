@@ -153,7 +153,7 @@
                                                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                                     <tr>
                                                      <td width="27"><img src="%BASEURL%images/email_images/core-left.jpg" alt=""></td>
-                                                     <td style="font-family: Arial, Helvetica, sans-serif; font-size: 8px; line-height: 20px; color: #fff;">For help, please email us at <a href="#" style="color: #fff;">Support@hungermafia.com</a> / Call : 1800-11-8200</td>
+                                                     <td style="font-family: Arial, Helvetica, sans-serif; font-size: 8px; line-height: 20px; color: #fff;">For help, please email us at <a href="#" style="color: #fff;">Support@hungermafia.com</a> / Call : 9358393588</td>
                                                      <td width="25"><img src="%BASEURL%images/email_images/core-right.jpg" alt=""></td>
                                                     </tr>  
                                                 </table>  
