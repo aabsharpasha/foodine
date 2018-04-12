@@ -47,7 +47,6 @@ class Tablebooking_Model extends CI_Model {
                 $tbl = array(
                     'tbl_restaurant AS tr',
                     'tbl_table_book AS ttb',
-                    'slot_master AS sm'
                 );
 
                 $condition = array(
@@ -56,7 +55,7 @@ class Tablebooking_Model extends CI_Model {
 //                    'sm.iSlotID = ttb.iSlotID'
                 );
 
-                $condition[] = 'ttb.iUserID IN (' . $userId . ')';
+ //               $condition[] = 'ttb.iUserID IN (' . $userId . ')';
                 //$condition[] = 'ttb.eBookingStatus = "Cart"';
 
                 $fields = implode(',', $fields);
@@ -267,11 +266,12 @@ class Tablebooking_Model extends CI_Model {
     function deleteBookingCart($userId = '', $bookedId = '') {
         try {
             if ($userId != '' && $bookedId != '') {
-                $this->db->delete('tbl_table_book', array('unique_code' => $bookedId, 'iUserID' => $userId));
+                $this->db->update('tbl_table_book', array('isDeleted' => 'yes'), array('unique_code' => $bookedId, 'iUserID' => $userId));
                 // DO688326 at BEMISAAL for 20-02-2017 at 10:15 PM.
                 
                 $detail = $this->getBookingRestaurantName($bookedId, $userId);
-                $msg = 'You cancelled your reservation '.$bookedId.' at '.$detail["vRestaurantName"].' for '.date("h:i A", $detail['tDateTime']).' PM on '.date("d-m-Y", $detail['tDateTime']).'.';
+                //print_r($detail);
+                $msg = 'Sorry you had to cancel your reservation at '.$detail["vRestaurantName"].' for '.date("d/m/Y@h:i A", strtotime($detail['bookedDate'])).'. We hope to book you again with special deals.';
                 $this->load->model('Sms_model', 'sms_m');
                 if($giftToFriend) {
                     $this->sms_m->destmobileno = $bookingMobileNumber;
@@ -396,8 +396,8 @@ class Tablebooking_Model extends CI_Model {
     
     function getBookingRestaurantName($bookingId, $userId) {
         try {
-            if (!empty($postValue)) {
-                extract($postValue);
+            if (!empty($bookingId)) {
+               // extract($postValue);
                 if ($userId != '' && $bookingId !='') {
                     $fields = array(
                         'ttb.vUserRequest AS userRequest',
@@ -405,23 +405,23 @@ class Tablebooking_Model extends CI_Model {
                         'ttb.vMobileNo AS userMobile',
                         'ttb.iPersonTotal AS totalPerson',
                         'ttb.iRestaurantId AS restaurantId',
-                        'DATE_FORMAT(ttb.tDateTime,\'' . MYSQL_DATE_FORMAT . '\') AS bookedDate',
-                        'sm.tstartFrom AS slotTime',
+                        'tr.vRestaurantName AS vRestaurantName',
+                        'ttb.tDateTime AS bookedDate',
+                        
                     );
 
                     $tbl = array(
                         'tbl_restaurant AS tr',
                         'tbl_table_book AS ttb',
-                        'slot_master AS sm'
                     );
 
                     $condition = array(
                         'tr.iRestaurantID IN(ttb.iRestaurantID)',
                         'ttb.iUserID = ' . $userId,
-                        'ttb.iTableBookID = ' . $bookingId,
+                        'ttb.unique_code = "' . $bookingId.'"',
                     );
 
-                    $condition[] = 'ttb.iUserID IN (' . $userId . ')';
+                    //$condition[] = 'ttb.iUserID IN (' . $userId . ')';
                     // $condition[] = 'ttb.eBookingStatus = "Cart"';
 
                     $fields = implode(',', $fields);
@@ -431,7 +431,7 @@ class Tablebooking_Model extends CI_Model {
                     $limit = ' LIMIT 1';
 
                     $qry = 'SELECT ' . $fields . $tbl . $condition . $orderBy . $limit;
-
+                    //echo $qry; //exit;
                     $res = $this->db->query($qry);
                     return $res->row_array();
                 }return '';
@@ -929,7 +929,7 @@ class Tablebooking_Model extends CI_Model {
                            
 $rest_msg = 'Greetings! Booking Alert Customer Name: '.$name.' '
         . 'Mobile no: '.$userDetails['userMobile'].' Date:'.date("d-m-Y", $bookingDateTime/1000).
-        ' Time:'.date("h:i A", $bookingDateTime/1000).' No of Guests: '.$peopleCount.' Table No:'.$tableId.' Thanking you! Team Foodine';
+        ' Time:'.date("h:i A", $bookingDateTime/1000).' No of Guests: '.$peopleCount.' Thanking you! Team Foodine';
                                 
                                 $rest['mobile'] = $restaurantMobile;
                                 $rest['msg'] = $rest_msg;
@@ -1178,7 +1178,7 @@ $rest_msg = 'Greetings! Booking Alert Customer Name: '.$name.' '
 
 
 
-                    $restaurantMobile = '9696149696';
+                    $restaurantMobile = '9358393588';
                     $preferredLocation = $location1.' '.$location2.' '.$location3;
                     $restaurants = $rest1.' '.$rest2.' '.$rest3;
                     $rest_msg = "Greetings! Booking Alert\n{$partyType}\nCustomer Name:{$bookingName}\nMobile no:{$mobileNumber}\nDate:{$bookingDate1}\nTime:{$bookingTime}\nNo of Guests:{$peopleCount}\nTable No:{$tableId}\nSpecial Requirement:{$specialRequest}\nPreffered Location: {$preferredLocation}Thanking you! Team Foodine";
