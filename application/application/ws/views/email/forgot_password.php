@@ -455,7 +455,7 @@
                                                 <br/><br/>Thank you for choosing foodine.
                                                 <br/>Please reset your password by clicking this link - <a href="%LINK%">Reset Password</a>
                                                 <br/>
-                                                <p><small>Happy to hear from you! If any further queries please email us on <a href="mailto:info@foodine.com"> info@foodine.com</a> </small></p>
+                                                <p><small>Happy to hear from you! If any further queries please email us on <a href="mailto:hi@foodine.in"> hi@foodine.in</a> </small></p>
                                             </p>
                                             <p>  Thanks,
                                                 <br/>foodine Team

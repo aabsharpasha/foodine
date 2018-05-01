@@ -146,7 +146,7 @@ class Booking extends REST_Controller {
                 switch ($resp) {
                     case 1 :
                         $STATUS = SUCCESS_STATUS;
-                        $MESSAGE = 'Your booking cancelled successfully, your booking amount will be refund in 3 working days';
+                        $MESSAGE = 'Booking amount paid if any will be refunded in 3 working days.';
                         break;
 
                     case -2:

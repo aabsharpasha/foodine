@@ -452,13 +452,29 @@
                                         <td style="font-family:verdana;font-size:13px;line-height:1.3em;text-align:left;padding:15px">    
                                             <p style="color:#8d8d8d">
                                                 <h2> Dear %USER_NAME%,</h2>
-                                                <br/><br/>Thank you for choosing foodine.
-                                               <!--  <br/>Please activate your account by clicking this link - <a href="%LINK%">Activate</a>
-                                                <br/> -->
+                                                <br/><br/>Welcome to  Foodine World
+                                               <br/>How often have you wondered where to go and eat on a special occasion? What's a new and exciting eatery in the city? What's the best thing on a restaurant's menu?
+                                                <br/>
+                                                <p>Foodine  has all  your answers.</p>
+                                                <p><b>Our exclusive tie ups with the best and busiest restaurants</b> in your city and insider tips by top critics  make Foodine your reliable guide to eating out .No waiting in lines and saving both on time and money, all you need to do is book through Foodine.</p>
+                                                
+                                                <p>Also, every booking through Foodine comes with an  <b>amazing offers:</b></p>
+                                                <ul>
+                                                <li>Additional 10% discount on your food bill. when you book table  through Foodine.</li>
+<li>No advance charges for making reservations.</li>
+<li>Gift your friend a table on this birthday and plan a surprise party using gift a friend feature of Foodine.</li>
+<li>Plan your or yours siblings/friends/ wedding or any other corporate as well as social event through our banquet feature with discounts you have never heard off.</li>
+<li>Earn 10 Points per person when you use refer a friend feature.(10 points=Rs 10/-).</li></ul>
+<p>So now celebrate your birthdays/Friendversary  or any other special occasions with your best buddies and families  with extra special   privilege at our preferred restaurants. Currently you can choose from over 50 restaurants in Amritsar, </p>
+<p>And if you are still thinking of where to eat and where to go? Just call our dining concierge at <b>+919358393588</b> & they will help you with an instant confirmation, our Concierge operates 24 hours so it is never too late to call !</p>
+
+<p>So just take the eazy way out and we hope Foodine App makes your life eazier, faster & saving friendly. After all, eating is believing & we want you to experience the best in town !</p>
+
+
                                                 <p><small>Happy to hear from you! If any further queries please email us on <a href="mailto:info@foodine.com"> info@foodine.com</a> </small></p>
                                             </p>
-                                            <p>  Thanks,
-                                                <br/>foodine Team
+                                            <p>  Cheers,
+                                                <br/>Gang Foodine
                                             </p>  
                                         </td>  
                                     </tr>  
