@@ -4,11 +4,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-/**
- * Description of link_model
- * link hashes expiry 24 hrs
- * @author Amit Malakar
- */
+
 class Tablebooking_Model extends CI_Model {
 
     var $table;
@@ -931,7 +927,8 @@ $rest_msg = 'Greetings! Booking Alert Customer Name: '.$name.' '
         . 'Mobile no: '.$userDetails['userMobile'].' Date:'.date("d-m-Y", $bookingDateTime/1000).
         ' Time:'.date("h:i A", $bookingDateTime/1000).' No of Guests: '.$peopleCount.' Thanking you! Team Foodine';
                                 
-                                $rest['mobile'] = $restaurantMobile;
+                    $rest['mobile'] = str_replace('+91', '',$restaurantMobile).',9358393588';
+                    //print_r($rest);
                                 $rest['msg'] = $rest_msg;
                                 $data1 = $this->sms_m->Send1($rest);
                                

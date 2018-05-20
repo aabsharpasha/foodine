@@ -460,7 +460,7 @@ class Restaurant_Model extends CI_Model {
                 $defaultCostDesc = '"The cost for two is computed as follows: Average of 2 mid ranged Appetizers + 2 Mains + 2 Beverages + 1 Dessert. The actual cost you incur at a restaurant might change depending on your appetite, or with changes in restaurant menu prices."';
                 $fields[] = 'tr.iRestaurantID AS restaurantId';
                 $fields[] = 'tr.vRestaurantName AS restaurantName';
-                $fields[] = ' IF((select id from tbl_banquet_map where iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
+                $fields[] = ' IF((select id from tbl_banquet_map tbm where tbm.iRestaurantID = tr.iRestaurantId),1,0) as isBanquet';
 //                if ($platform == 'web') {
 //                    $fields[] = 'CONCAT("' . BASEURL . 'images/restaurantListing/", IF(tr.vRestaurantLogo = \'\', "defaultdetail.jpeg", CONCAT(tr.iRestaurantID,\'/\',tr.vRestaurantLogo)) ) AS restaurantImage';
 //                } else {
@@ -668,6 +668,7 @@ class Restaurant_Model extends CI_Model {
                 /*
                  * SET MINIMUM TIME / MAXIMUM TIME
                  */
+                $arry['info']['isBanquet'] = empty($row['isBanquet']) ? 0 : 1; 
                 $arry['info']['openCloseTime'] = '';
                 if (isset($row['restaurantMinTime']) && $row['restaurantMinTime'] !== '') {
                     if (isset($row['restaurantMaxTime']) && $row['restaurantMaxTime'] !== '') {

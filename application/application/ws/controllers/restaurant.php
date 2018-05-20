@@ -363,6 +363,7 @@ class Restaurant extends REST_Controller {
               $resDetail = $this->restaurant_model->getRestaurantDetail($this->post('restaurantId'), $this->post('longitude'), $this->post('latitude'), $this->post('userId'), $this->post('platform'));
               $resRet['id'] = $resDetail['info']['restaurantId'];
               $resRet['rating'] = $resDetail['info']['restaurantRatting'];
+              $resRet['isBanquet'] = $resDetail['info']['isBanquet'];
               $resRet['bookmarked'] = $resDetail['info']['isFavourite'] == 'yes' ? "true" : "false" ;
               $resRet['distance'] = $resDetail['info']['restaurantDistance'];
               $resRet['address'] = $resDetail['info']['restaurantAddress'];
