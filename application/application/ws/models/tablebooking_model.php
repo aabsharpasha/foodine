@@ -273,7 +273,8 @@ class Tablebooking_Model extends CI_Model {
                     $this->sms_m->destmobileno = $bookingMobileNumber;
                 }
                 $userDetails = $this->general_model->getUserBasicRecordById($userId);
-                $this->sms_m->destmobileno = $userDetails['vMobileNo'];
+                //print_r($userDetails); exit;
+                $this->sms_m->destmobileno = str_replace('+91', '',$userDetails['userMobile']).',9358393588';
                 $this->sms_m->msg = $msg;
                 $data = $this->sms_m->Send();
                 $smsData = json_decode($data);
@@ -923,10 +924,10 @@ class Tablebooking_Model extends CI_Model {
                               //  sleep(5);
                             $name = $userDetails['userFirstName']." ".$userDetails['userLastName'];
                            
-$rest_msg = 'Greetings! Booking Alert Customer Name: '.$name.' '
-        . 'Mobile no: '.$userDetails['userMobile'].' Date:'.date("d-m-Y", $bookingDateTime/1000).
-        ' Time:'.date("h:i A", $bookingDateTime/1000).' No of Guests: '.$peopleCount.' Thanking you! Team Foodine';
-                                
+$rest_msg = 'Greetings! Booking Alert Customer Name: '.$bookingName.' '
+        . 'Mobile no: '.$mobile.' Date:'.date("d-m-Y", $bookingDateTime/1000).
+        ' Time:'.date("h:i A", $bookingDateTime/1000).' No of Guests: '.$peopleCount.' Resturanta Name: '.$restaurantName["vRestaurantName"].' Thanking you! Team Foodine';
+                        
                     $rest['mobile'] = str_replace('+91', '',$restaurantMobile).',9358393588';
                     //print_r($rest);
                                 $rest['msg'] = $rest_msg;
